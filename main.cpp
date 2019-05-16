@@ -1,4 +1,5 @@
 #include "tree.h"
+#include "merge.h"
 #include "function.h"
 #include <iostream>
 #include <stdio.h>
@@ -6,11 +7,19 @@
 
 int main (){
     Tree* first = new Tree;
+    Tree* scn = new Tree;
+    Merge* newMerge = new Merge;
+    int j;
+    newMerge->initialize();
+    cout << "Podaj pierwsza wartosc do drzewa"<<endl;
     first->initialize();
-    Tree* y = new Tree;
+    cout << "Podaj pierwsza wartosc dla drugiego drzewa " << endl;
+    scn->initialize();
+    int i;
+    Tree* y;
     char x;
-    while (x != '5'){
-        cout << "1.Dodaj\n2.Wyswietl\n3.Wyszukaj\n5.Wyjdz" << endl;
+    while (x != '7'){
+        cout << "1.Dodaj(1)\n2.Usun(1)\n3.Wyszukaj(1)\n4.Dodaj(2)\n5.Usun(2)\n6.Wyszukaj(2)\n7.wyjdz" << endl;
         cin >> x;
 
         switch(x){
@@ -19,10 +28,16 @@ int main (){
         first->addElement(first);
         break;
     case '2':
+        cout << "Podaj wartosc ktora chcesz usunac:" << endl;
+        cin >> i;
+        first->delElement(first, i);
+        cleanScr();
         break;
     case '3':
         cleanScr();
-        y = first->lookFor(first);
+        cout << "Podaj szukana wartosc:\n";
+        cin >> j;
+        y = first->lookFor(first,j);
         cleanScr();
         if(y!=NULL){
             cout << "Znaleziony element: ";
@@ -32,9 +47,43 @@ int main (){
             cout << "Nie ma takiego elementu" << endl;
         }
         break;
+    case '4':
+        cleanScr();
+        scn->addElement(scn);
+        break;
+    case '5':
+        cout << "Podaj wartosc ktora chcesz usunac:" << endl;
+        cin >> i;
+        scn->delElement(scn, i);
+        cleanScr();
+        break;
+    case '6':
+        cleanScr();
+        cout << "Podaj szukana wartosc:\n";
+        cin >> j;
+        y = scn->lookFor(scn,j);
+        cleanScr();
+        if(y!=NULL){
+            cout << "Znaleziony element: ";
+            y->display();
+            cout << endl;
+        }else if(y==NULL){
+            cout << "Nie ma takiego elementu" << endl;
+        }
+        break;
+    case '8':
+        if(first->isEqual(first, scn)){
+            cout << "Drzewa sa rowne" << endl;
+        }else{
+        cout << "Drzewa sie roznia"<<endl;
+        }
+        break;
     default:
         break;}
     }
+    delete first;
+    delete scn;
+    delete newMerge;
     return 0;
  }
 

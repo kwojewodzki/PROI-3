@@ -1,0 +1,16 @@
+CC = g++
+
+main.out: main.o class.o function.o
+	$(CC) -O3 main.o class.o function.o  -o $@.out
+
+debug: main.o  class.o function.o
+	$(CC) -g -Wall -pedantic main.o  -o $@.out
+
+main.o: main.cpp tree.h function.h
+	$(CC) -c main.cpp
+
+tree.o: tree.cpp class.h 
+	$(CC) -c class.cpp
+
+merge.o: merge.cpp merge.h
+	$(CC) -c merge.cpp
