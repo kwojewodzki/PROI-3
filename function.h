@@ -3,3 +3,4 @@
 void cleanScr(){
     system("cls");
 }
+
